@@ -1,0 +1,38 @@
+name: "build-firefox"
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "Build and relase on github"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v1
+
+      - name: "web-ext build"
+        id: web-ext-build
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: build
+          source: firefox/src
+          filename: "{name}-{version}.xpi"
+
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: sign
+          source: ${{ steps.web-ext-build.outputs.target }}
+          channel: unlisted
+          apiKey: ${{ secrets.WEB_EXT_API_KEY }}
+          apiSecret: ${{ secrets.WEB_EXT_API_SECRET }}
+          timeout: 900000
+
+      - name: "Create Release"
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ steps.web-ext-sign.outputs.target }}
+          repo: adriansahlman/breakthrough-twitter-login-wall
+          name: latest
+          token: ${{ secrets.GITHUB_TOKEN }}
