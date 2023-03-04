@@ -132,14 +132,6 @@ watch(() => {
       currentUpdateMsgBoxInstance.destory()
       currentUpdateMsgBoxInstance = undefined
     }
-
-    const lastShown = (await chrome.storage.local.get())[
-      globalThis.BTLW__STORAGE_KEYS.removalLastShown
-    ]
-
-    if (!lastShown || Date.now() - lastShown > 7 * 24 * 60 * 60 * 1000) {
-      showWallRemovalWindow()
-    }
   }, 300)
 })
 
