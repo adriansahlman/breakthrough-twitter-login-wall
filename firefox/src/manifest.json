@@ -6,7 +6,7 @@
   "description": "Remove forced twitter login",
   "browser_specific_settings": {
     "gecko": {
-      "id": "githubcomadriansahlman-breakthrough-twitter-login-wal"
+      "id": "twitterbreakthrough"
     }
   },
   "permissions": ["*://twitter.com/*", "*://mobile.twitter.com/*", "storage"],
