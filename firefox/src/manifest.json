@@ -6,7 +6,7 @@
   "description": "Remove forced twitter login",
   "browser_specific_settings": {
     "gecko": {
-      "id": "twitterbreakthrough"
+      "id": "twitterbreakthrough@adriansahlman"
     }
   },
   "permissions": ["*://twitter.com/*", "*://mobile.twitter.com/*", "storage"],
